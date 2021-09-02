@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: e2e
+  namespace: selenosis
+spec:
+  template:
+    spec:
+      containers:
+        - name: e2e
+          imagePullPolicy: Never
+          image: e2e
+          resources:
+            limits:
+              cpu: "0.25"
+              memory: "500Mi"
+            requests:
+              cpu: "0.05"
+              memory: "400Mi"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 0

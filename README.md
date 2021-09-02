@@ -1,3 +1,13 @@
-### Reference
+## Selenosis setup
 
-[1] [Running serverless container](https://cloud.google.com/community/tutorials/cicd-cloud-run-github-actions)
+1. Cloud
+
+```bash
+sh ./selenosis-deploy/script.sh
+```
+
+2. Local
+
+```bash
+LOCAL=true sh ./selenosis-deploy/script.sh
+```
