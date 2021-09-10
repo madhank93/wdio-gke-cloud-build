@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  selenosis.server: |
+    selenosis.svc.cluster.local:53 {
+        errors
+        kubernetes cluster.local {
+          namespaces selenosis
+        }
+    }
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
