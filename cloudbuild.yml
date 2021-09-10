@@ -15,14 +15,44 @@ steps:
 
   # This step deploys the new version of our container image
   # in the Kubernetes Engine cluster.
-  - name: "gcr.io/cloud-builders/kubectl"
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: "Create GKE autopilot cluster"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters create-auto $_CUSTOM_REGION
+
+    env:
+      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
+
+  # This step deploys the new version of our container image
+  # in the Kubernetes Engine cluster.
+  - name: "gcr.io/cloud-builders/gke-deploy"
     id: "Deploy selenosis setup"
     entrypoint: "bash"
     args:
       - "-c"
       - |
-        "sh ./selenosis-deploy/script.sh"
+        gcloud container clusters get-credentials $_CUSTOM_REGION --region=$_CUSTOM_REGION
+        sh ./selenosis-deploy/script.sh
+    env:
+      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
   - name: "gcr.io/cloud-builders/kubectl"
     id: "Deploy e2e"
-    args: ["apply", "-f", "e2e-test.yml"]
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters get-credentials $_CUSTOM_REGION --region=$_CUSTOM_REGION
+        kubectl apply -f e2e-test.yml
+    env:
+      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
+
+substitutions:
+  _CUSTOM_REGION: us-central1
+  _CUSTOM_CLUSTER: gke-cluster
