@@ -16,4 +16,4 @@ kubectl apply -f ./selenosis-deploy/03-selenosis.yaml
 
 kubectl apply -f ./selenosis-deploy/05-selenosis-hpa.yaml
 
-kubectl apply -f ./selenosis-deploy/06-core-dns.yaml
+kubectl apply -f ./selenosis-deploy/06-coredns.yaml
