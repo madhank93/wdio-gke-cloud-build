@@ -16,12 +16,12 @@ steps:
   # This step deploys the new version of our container image
   # in the Kubernetes Engine cluster.
   - name: "gcr.io/cloud-builders/gcloud"
-    id: "Create GKE autopilot cluster"
+    id: "Create GKE cluster"
     entrypoint: "bash"
     args:
       - "-c"
       - |
-        gcloud container clusters create-auto $_CUSTOM_REGION
+        gcloud container clusters $_CUSTOM_REGION
 
     env:
       - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
