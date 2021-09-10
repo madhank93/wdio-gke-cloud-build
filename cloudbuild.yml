@@ -21,7 +21,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters $_CUSTOM_REGION
+        gcloud container clusters create $_CUSTOM_REGION
 
     env:
       - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
