@@ -9,7 +9,7 @@ spec:
       containers:
         - name: e2e
           imagePullPolicy: Never
-          image: e2e
+          image: gcr.io/$PROJECT_ID/e2e
           resources:
             limits:
               cpu: "0.25"
