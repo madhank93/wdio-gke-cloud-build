@@ -21,7 +21,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters create --num-nodes=6 --machine-type=e2-custom-6-12288
+        gcloud container clusters create --num-nodes=1 --machine-type=e2-standard-4
 
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
@@ -41,7 +41,7 @@ steps:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
       - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
-  - name: "gcr.io/cloud-builders/kubectl"
+  - name: "gcr.io/cloud-builders/gke-deploy"
     id: "Deploy e2e"
     entrypoint: "bash"
     args:
