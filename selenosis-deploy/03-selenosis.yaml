@@ -35,9 +35,9 @@ spec:
               "--proxy-image",
               "alcounit/seleniferous:v1.0.2",
               "--session-wait-timeout",
-              "2m30s",
+              "5m0s",
               "--browser-wait-timeout",
-              "2m30s",
+              "5m0s",
             ]
           image: alcounit/selenosis:v1.0.5
           name: selenosis
