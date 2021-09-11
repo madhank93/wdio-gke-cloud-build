@@ -21,10 +21,10 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters create $_CUSTOM_REGION --num-nodes=6 --machine-type=custom-8-12288
+        gcloud container clusters create --num-nodes=6 --machine-type=e2-custom-6-12288
 
     env:
-      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
       - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
   # This step deploys the new version of our container image
@@ -35,10 +35,10 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters get-credentials $_CUSTOM_REGION --region=$_CUSTOM_REGION
+        gcloud container clusters get-credentials
         sh ./selenosis-deploy/script.sh
     env:
-      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
       - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
   - name: "gcr.io/cloud-builders/kubectl"
@@ -47,12 +47,12 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters get-credentials $_CUSTOM_REGION --region=$_CUSTOM_REGION
+        gcloud container clusters get-credentials
         kubectl apply -f e2e-test.yml
     env:
-      - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
+      - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
       - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
 substitutions:
-  _CUSTOM_REGION: us-central1
+  _CUSTOM_ZONE: asia-south1-a
   _CUSTOM_CLUSTER: gke-cluster
