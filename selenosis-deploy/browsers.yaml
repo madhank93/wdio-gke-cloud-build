@@ -5,7 +5,7 @@ chrome:
     - SYS_ADMIN
   versions:
     "91.0":
-      image: "selenoid/chrome_91.0"
+      image: "selenoid/chrome:91.0"
 firefox:
   defaultVersion: "88.0"
   path: "/wd/hub"
@@ -13,4 +13,4 @@ firefox:
     - SYS_ADMIN
   versions:
     "88.0":
-      image: "selenoid/firefox_88.0"
+      image: "selenoid/firefox:88.0"
