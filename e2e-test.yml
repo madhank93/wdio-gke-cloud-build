@@ -6,17 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: hub-status
-          image: nikolovdragan/multi-purpose-toolbox
-          command: [
-          'sh', 
-          '-c',
-          "until [ curl selenosis:4444/wd/hub/status | jq '.[].ready' > 0 ];
-          do echo 'waiting for wd/hub pods ready state more than zero';
-          sleep 5;
-          done"
-          ]
       containers:
         - name: e2e
           imagePullPolicy: IfNotPresent
