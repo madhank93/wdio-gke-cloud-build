@@ -21,7 +21,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters create $_CUSTOM_REGION
+        gcloud container clusters create $_CUSTOM_REGION --num-nodes=6 --machine-type=custom-8-12288
 
     env:
       - CLOUDSDK_COMPUTE_REGION=$_CUSTOM_REGION
