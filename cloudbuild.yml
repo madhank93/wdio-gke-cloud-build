@@ -25,7 +25,6 @@ steps:
 
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
-      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
   # This step deploys the new version of our container image
   # in the Kubernetes Engine cluster.
@@ -35,11 +34,10 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters get-credentials
+        gcloud container clusters get-credentials $_CUSTOM_CLUSTER
         sh ./selenosis-deploy/script.sh
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
-      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
   - name: "gcr.io/cloud-builders/gke-deploy"
     id: "Deploy e2e"
@@ -47,11 +45,10 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters get-credentials
+        gcloud container clusters get-credentials $_CUSTOM_CLUSTER
         kubectl apply -f e2e-test.yml
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
-      - CLOUDSDK_CONTAINER_CLUSTER=$_CUSTOM_CLUSTER
 
 substitutions:
   _CUSTOM_ZONE: asia-south1-a
