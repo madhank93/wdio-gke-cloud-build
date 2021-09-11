@@ -6,6 +6,10 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: init-wait
+          image: alpine
+          command: ["sh", "-c", "sleep 5m"]
       containers:
         - name: e2e
           imagePullPolicy: IfNotPresent
