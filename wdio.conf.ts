@@ -64,15 +64,6 @@ export const config: WebdriverIO.Config = {
           prompt_for_download: false,
         },
       },
-      "selenoid:options": {
-        enableLog: true,
-        ...(process.env.SELENOID === "true"
-          ? {
-              enableVNC: true,
-              //enableVideo: true,
-            }
-          : {}),
-      },
     },
     {
       browserName: "firefox",
@@ -87,15 +78,6 @@ export const config: WebdriverIO.Config = {
         ),
       },
       acceptInsecureCerts: true,
-      "selenoid:options": {
-        enableLog: true,
-        ...(process.env.SELENOID === "true"
-          ? {
-              enableVNC: true,
-              //enableVideo: true,
-            }
-          : {}),
-      },
     },
   ],
   //
