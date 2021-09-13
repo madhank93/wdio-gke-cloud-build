@@ -1,6 +1,14 @@
 chrome:
   defaultVersion: "91.0"
   path: "/"
+  spec:
+    env:
+      - name: TZ
+        value: Asia/Kolkata
+      - name: SCREEN_RESOLUTION
+        value: 1920x1080x24
+      - name: ENABLE_VNC
+        value: "true"
   kernelCaps:
     - SYS_ADMIN
   versions:
@@ -9,6 +17,14 @@ chrome:
 firefox:
   defaultVersion: "88.0"
   path: "/wd/hub"
+  spec:
+    env:
+      - name: TZ
+        value: Asia/Kolkata
+      - name: SCREEN_RESOLUTION
+        value: 1920x1080x24
+      - name: ENABLE_VNC
+        value: "true"
   kernelCaps:
     - SYS_ADMIN
   versions:

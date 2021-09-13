@@ -1,6 +1,12 @@
 chrome:
   defaultVersion: "91.0"
   path: "/"
+  spec:
+    env:
+      - name: TZ
+        value: Asia/Kolkata
+      - name: ENABLE_VNC
+        value: "false"
   kernelCaps:
     - SYS_ADMIN
   versions:
@@ -9,6 +15,12 @@ chrome:
 firefox:
   defaultVersion: "88.0"
   path: "/wd/hub"
+  spec:
+    env:
+      - name: TZ
+        value: Asia/Kolkata
+      - name: ENABLE_VNC
+        value: "false"
   kernelCaps:
     - SYS_ADMIN
   versions:
