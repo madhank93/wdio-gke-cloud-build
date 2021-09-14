@@ -4,6 +4,8 @@ kubectl apply -f ./selenosis-deploy/01-namespace.yaml
 
 kubectl apply -f ./selenosis-deploy/06-coredns.yaml
 
+kubctl apply -f ./selenosis-deploy/07-pre-pull-images.yml
+
 if [ $LOCAL ] 
 then
     kubectl create cm selenosis-config --from-file=browsers.yaml=selenosis-deploy/vnc-browsers.yaml -n selenosis
