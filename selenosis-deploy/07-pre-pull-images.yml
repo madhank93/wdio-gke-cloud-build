@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: pre-pull
+  annotations:
+    source: "https://gist.github.com/itaysk/7bc3e56d69c4d72a549286d98fd557dd"
+spec:
+  selector:
+    matchLabels:
+      name: pre-pull
+  template:
+    metadata:
+      labels:
+        name: pre-pull
+    spec:
+      initContainers:
+        - name: pre-pull-chrome
+          image: docker
+          command:
+            - docker
+            - pull
+            - selenoid/chrome:91.0
+        - name: pre-pull-firefox
+          image: docker
+          command:
+            - docker
+            - pull
+            - selenoid/firefox:88.0
+          volumeMounts:
+            - name: docker
+              mountPath: /var/run
+      volumes:
+        - name: docker
+          hostPath:
+            path: /var/run
+      containers:
+        - name: pause
+          image: gcr.io/google_containers/pause
