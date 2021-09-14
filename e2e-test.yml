@@ -5,6 +5,9 @@ metadata:
   namespace: selenosis
 spec:
   template:
+    metadata:
+      labels:
+        selenosis.app.type: worker
     spec:
       containers:
         - name: e2e
@@ -16,7 +19,7 @@ spec:
               memory: "2Gi"
             requests:
               cpu: "1"
-              memory: "1Gi"
+              memory: "512Mi"
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       terminationGracePeriodSeconds: 0
