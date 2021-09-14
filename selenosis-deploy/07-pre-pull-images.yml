@@ -1,26 +1,29 @@
-apiVersion: apps/v1
-kind: DaemonSet
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: pre-pull
-  annotations:
-    source: "https://gist.github.com/itaysk/7bc3e56d69c4d72a549286d98fd557dd"
+  name: pre-pull-browser-images
+  #namespace: selenosis
 spec:
-  selector:
-    matchLabels:
-      name: pre-pull
+  ttlSecondsAfterFinished: 10
+  parallelism: 2
   template:
     metadata:
       labels:
-        name: pre-pull
+        selenosis.app.type: worker
     spec:
-      initContainers:
-        - name: pre-pull-chrome
+      containers:
+        - name: chrome-image
+          imagePullPolicy: IfNotPresent
           image: docker
           command:
             - docker
             - pull
             - selenoid/chrome:91.0
-        - name: pre-pull-firefox
+          volumeMounts:
+            - name: docker
+              mountPath: /var/run
+        - name: firefox-image
+          imagePullPolicy: IfNotPresent
           image: docker
           command:
             - docker
@@ -33,6 +36,5 @@ spec:
         - name: docker
           hostPath:
             path: /var/run
-      containers:
-        - name: pause
-          image: gcr.io/google_containers/pause
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 0
