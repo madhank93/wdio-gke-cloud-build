@@ -105,10 +105,10 @@ export const config: WebdriverIO.Config = {
   //
   // Default timeout in milliseconds for request
   // if Selenium Grid doesn't send response
-  connectionRetryTimeout: 210000,
+  connectionRetryTimeout: 120000,
   //
   // Default request retries count
-  connectionRetryCount: 5,
+  connectionRetryCount: 10,
   //
   // Test runner services
   // Services take over a specific job you don't want to take care of. They enhance
