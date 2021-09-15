@@ -16,6 +16,13 @@ firefox:
   defaultVersion: "88.0"
   path: "/wd/hub"
   spec:
+    resources:
+      requests:
+        memory: 500Mi
+        cpu: "0.5"
+      limits:
+        memory: 2Gi
+        cpu: "1.5"
     env:
       - name: TZ
         value: Asia/Kolkata
