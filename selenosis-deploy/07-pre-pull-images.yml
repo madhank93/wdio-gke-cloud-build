@@ -2,14 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: pre-pull-browser-images
-  namespace: selenosis
 spec:
   ttlSecondsAfterFinished: 10
   parallelism: 2
   template:
-    metadata:
-      labels:
-        selenosis.app.type: worker
     spec:
       containers:
         - name: chrome-image
