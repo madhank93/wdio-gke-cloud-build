@@ -32,6 +32,10 @@ spec:
               "seleniferous",
               "--browser-limit",
               "50",
+              "--browser-wait-timeout",
+              "3m30s",
+              "--session-wait-timeout",
+              "3m30s",
               "--proxy-image",
               "alcounit/seleniferous:v1.0.2",
             ]
