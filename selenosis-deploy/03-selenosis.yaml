@@ -4,7 +4,7 @@ metadata:
   name: selenosis
   namespace: selenosis
 spec:
-  strategy:
+  strategy: # deployment strategy used to replace existing pods with new one
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
@@ -21,8 +21,7 @@ spec:
       namespace: selenosis
     spec:
       containers:
-        - args:
-            [
+        - args: [
               "/selenosis",
               "--browsers-config",
               "./config/browsers.yaml",
@@ -31,7 +30,7 @@ spec:
               "--service-name",
               "seleniferous",
               "--browser-limit",
-              "50",
+              "50", # this specifies max number of browser allowed
               "--browser-wait-timeout",
               "3m30s",
               "--session-wait-timeout",
@@ -56,13 +55,13 @@ spec:
             - mountPath: ./config
               name: browsers-config
           imagePullPolicy: IfNotPresent
-          readinessProbe:
+          readinessProbe: # kubelet uses readiness probes to know when a container is ready to start accepting traffic
             httpGet:
               path: /healthz
               port: 4444
             periodSeconds: 2
             initialDelaySeconds: 30
-          livenessProbe:
+          livenessProbe: # kubelet uses liveness probes to check if app is live
             httpGet:
               path: /healthz
               port: 4444

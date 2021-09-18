@@ -73,5 +73,3 @@ spec:
     app: selenoid-ui
   sessionAffinity: None
   type: LoadBalancer
-status:
-  loadBalancer: {}

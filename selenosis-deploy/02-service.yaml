@@ -6,17 +6,15 @@ metadata:
 spec:
   externalTrafficPolicy: Cluster
   ports:
-  - name: selenium
-    port: 4444
-    protocol: TCP
-    targetPort: 4444
-    nodePort: 31000
+    - name: selenium
+      port: 4444 # other pods in the cluster that may need to access the service will just use port
+      protocol: TCP
+      targetPort: 4444 # it forwards the traffic to ContainerPort (where the app might be listening)
+      nodePort: 31000 # makes the service visible outside the Kubernetes cluster by the node’s IP address and the port number
   selector:
     app: selenosis
   sessionAffinity: None
-  type: LoadBalancer
-status:
-  loadBalancer: {}
+  type: LoadBalancer # exposes the Service externally using a cloud provider's load balancer
 ---
 apiVersion: v1
 kind: Service
@@ -28,4 +26,3 @@ spec:
     type: browser
   clusterIP: None
   publishNotReadyAddresses: true
-  
