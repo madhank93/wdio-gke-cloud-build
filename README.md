@@ -9,5 +9,5 @@ sh ./selenosis-deploy/script.sh
 2. Local
 
 ```bash
-LOCAL=true sh ./selenosis-deploy/script.sh
+DEBUG=true sh ./selenosis-deploy/script.sh
 ```
