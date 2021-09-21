@@ -22,7 +22,7 @@ firefox:
         cpu: "0.5"
       limits:
         memory: 2Gi
-        cpu: "1.5"
+        cpu: "1"
     env:
       - name: TZ
         value: Asia/Kolkata
