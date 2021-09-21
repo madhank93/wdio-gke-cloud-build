@@ -5,7 +5,7 @@ steps:
     args: ["build", "-t", "gcr.io/$PROJECT_ID/e2e", "."]
 
   # This step pushes the image to Container Registry
-  # The PROJECT_ID and SHORT_SHA variables are automatically
+  # The PROJECT_ID variables are automatically
   # replaced by Cloud Build.
   - name: "gcr.io/cloud-builders/docker"
     id: "Push docker image to container registry"
@@ -13,8 +13,9 @@ steps:
       - "push"
       - "gcr.io/$PROJECT_ID/e2e"
 
-  # This step deploys the new version of our container image
-  # in the Kubernetes Engine cluster.
+  # This step creates a GKE cluster
+  # with 1 node
+  # config of 8 cpu and 32gb ram.
   - name: "gcr.io/cloud-builders/gcloud"
     id: "Create GKE cluster"
     entrypoint: "bash"
@@ -26,7 +27,7 @@ steps:
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
 
-  # This step deploys the new version of our container image
+  # This step deploys selenosis setup
   # in the Kubernetes Engine cluster.
   - name: "gcr.io/cloud-builders/gke-deploy"
     id: "Deploy selenosis setup"
@@ -39,6 +40,8 @@ steps:
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
 
+  # This step deploys e2e tests
+  # in the Kubernetes Engine cluster.
   - name: "gcr.io/cloud-builders/gke-deploy"
     id: "Deploy e2e"
     entrypoint: "bash"
