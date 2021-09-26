@@ -22,7 +22,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container clusters create $_CUSTOM_CLUSTER --num-nodes=1 --machine-type=e2-custom-14-28672
+        gcloud container clusters create $_CUSTOM_CLUSTER --num-nodes=1 --machine-type=e2-custom-12-28672
 
     env:
       - CLOUDSDK_COMPUTE_ZONE=$_CUSTOM_ZONE
