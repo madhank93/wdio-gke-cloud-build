@@ -11,3 +11,5 @@ sh ./selenosis-deploy/script.sh
 ```bash
 DEBUG=true sh ./selenosis-deploy/script.sh
 ```
+
+Refer medium blog -
