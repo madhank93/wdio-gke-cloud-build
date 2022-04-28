@@ -13,7 +13,7 @@ spec:
       containers:
         - name: e2e
           imagePullPolicy: IfNotPresent
-          image: gcr.io/wdio-gke/e2e:latest
+          image: gcr.io/scaling-tests-gke/e2e:latest # configure image name accordingly
           resources:
             limits:
               cpu: "3"

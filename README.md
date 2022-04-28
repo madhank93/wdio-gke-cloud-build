@@ -12,4 +12,4 @@ sh ./selenosis-deploy/script.sh
 DEBUG=true sh ./selenosis-deploy/script.sh
 ```
 
-Refer medium blog -
+Refer [medium blog](https://medium.com/p/624d955f6698)
